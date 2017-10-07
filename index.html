@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-      <!-- Bootstrap File -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Skranji:700" rel="stylesheet">
     <title>Psychic Game</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
   </head>
   
   <body>
@@ -17,10 +17,15 @@
 
     <!-- Jumbotron with Title -->
     <div class="jumbotron">
+      <div>
+        <img src="assets/images/crystal_ball.png" alt="pic of psychic" class="img">
+      </div>
 
-      <h1 class="text-center"><strong>Psychic Game</strong></h1>
-      <h3 class="text-center">Guess which letter I'm thinking of!</h3>
-
+      <div>
+      <h1 class="text-center padme"><strong>The Psychic Game</strong></h1>
+      <h3 class="text-center padme">Can you guess which letter I'm thinking?</h3>
+      <p  class="text-center padme">Simply guess by typing a letter. You have 9 tries.</p>
+      </div>
     </div>
 
     <!-- Left panel with all the scoring information -->
@@ -28,7 +33,7 @@
       <div class="col-lg-6">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Your Scores</h3>
+            <h3 class="panel-title">Your Scores:</h3>
           </div>
           
           <div class="panel-body">
@@ -46,98 +51,18 @@
 
          <div class="panel panel-default">
           <div class="panel-heading">
-            <h3 class="panel-title">Your Guesses</h3>
+            <h3 class="panel-title">Your Guesses So Far:</h3>
           </div>
           
           <div class="panel-body">
             <div class="text-center">
             <p id="yourguesses"></p>
+
             </div>
           </div>
         
         </div>
-      </div>
-    </div>
-
-    <script>
-
-      // VARIABLES
-      // ==========================================================================
-      // First create an array from which a letter will ben randomly chosen and be the game's guessed letter.
-
-      var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
-      // Create an array that will append the guesses of the user
-
-      var letterGuesses = [];
-
-      // Set the scores to zero
-
-      var winsScore = 0;
-      var lossScore = 0;
-      var guessTracker = 9;
-
-      function updateScore() {
-        document.querySelector("#wins").innerHTML = "Wins: " + winsScore;
-        document.querySelector("#losses").innerHTML = "Losses: " + lossScore;
-        document.querySelector("#guesses").innerHTML = "Guesses: " + guessTracker;
-        }  
-
-      function updateGuesses() {
-       document.querySelector("#yourguesses").innerHTML = "Your guesses so far: " + letterGuesses;
-      }
-      // Select the letter to be guessed
-      // 1 - 24
-      // Make this a function to be called in the loop below
-      function pickLetter() {
-        newNbr = Math.floor(Math.random() * 26) + 1;
-        selLetter=letterArray[newNbr];
-        alert(selLetter);
-      }
-
-      // Show the scores on the webpage even before the game starts.
-      updateScore();
-      pickLetter();
-      updateGuesses();
-      
-      //Start the game by "listening" for a keystroke;
-      // When the user presses a key, it will run the following function...
-      document.onkeyup = function(event) {
-
-      // If guess tracker is at 9, start over.
-        //Reset the guess aray, add on to loss score, reset guess tracker, update scores and repick letter
-      if (guessTracker === 0) {
-        letterGuesses = [];
-        lossScore++;
-        guessTracker=9;
-        updateScore();
-        pickLetter();
-        alert("You've run out of guesses! Let's start over with a new letter.")
-        }
-
-      // Determine which key was pressed, make it lowercase, and set it to the userInput variable.
-      var userInput = String.fromCharCode(event.keyCode).toLowerCase();    
-
-        //if they guessed the correct letter, up the win score by one, decrease guess tracker by one, update score in hmtel section clearout the letters guessed array, 
-        if (userInput === selLetter) {
-          alert("Congrats! You win!");
-          winsScore++;
-          guessTracker = 9;
-          letterGuesses = [];
-          updateScore();
-          pickLetter();
-        } 
-        //Otherwise, they didn't get the right answer. They can keep on guessing until they reach 9 attempts;
-        else {
-          guessTracker--;
-          letterGuesses.push(userInput);
-          updateScore();
-          updateGuesses();
-        }  
-      }
-
-
-    </script>
-    
+      </div>  
+  <script type="text/javascript" src="assets/javascript/game.js"></script>  
   </body>
 </html>
